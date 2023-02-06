@@ -1,0 +1,178 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  세션결과값에 따라 로그인 페이지 이동 -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>대학교 검색 | 한국장학재단</title>
+    <link rel="stylesheet" type="text/css" href="https://static.kosaf.go.kr/www/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="https://static.kosaf.go.kr/www/css/popup_member.css" />
+    <link rel="stylesheet" type="text/css" href="https://static.kosaf.go.kr/www/css/xq_contents.css" />
+    <link rel="stylesheet" type="text/css" href="https://static.kosaf.go.kr/www/css/web_accb.css" />
+    <!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="https://static.kosaf.go.kr/www/css/content_ie7.css">
+	<![endif]-->
+    <script type="text/javascript" src="https://static.kosaf.go.kr/www/js/common/public.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        function fn_univNameChk() {
+            var univNameStr = document.getElementById("univ_name").value;
+
+            if (univNameStr == "") {
+                alert("학교명을 입력하세요.");
+                document.getElementById("univ_name").focus();
+                return;
+            }
+
+            if (univNameStr.length < 2) {
+                alert("학교명을 2자 이상 입력하세요.");
+                document.getElementById("univ_name").focus();
+                return;
+            }
+
+            document.plan.submit();
+        }
+
+        function setUnivInfo(univCode, univName, groundCode, foundCode, cityCode, sysCode) {
+
+            var frm = opener.document.plan;
+            frm.univCode.value = univCode;				// 학교코드
+            frm.univName.value = univName;				// 학교명
+            frm.univGroundCode.value = groundCode;		// 본분교
+            frm.univFoundCode.value = foundCode;		// 설립구분
+            frm.univCityCode.value = cityCode;			// 지역코드
+            frm.univSysCode.value = sysCode;			// 학교구분
+            frm.className.value = "";					// 학과명
+            frm.fstClassCode.value = "";				// 계열코드
+            frm.course.value = "";						// 학위
+            frm.sndClassCode.value = "";	// 중분류코드
+            frm.trdClassCode.value = "";	// 소분류코드
+            frm.classSeq.value = "";			// 학과일련번호
+            if (frm.scno.value) frm.scno.value = "";     // 학번
+            if (frm.grdCd.value) frm.grdCd.value = "";    // 학년
+            if (frm.scrgCd.value) frm.scrgCd.value = "";   // 학기
+            if (frm.admYr.value) frm.admYr.value = "";    // 입학년도
+            if (frm.admMm.value) frm.admMm.value = "";    // 입학월
+            if (frm.grdtScdlYr.value) frm.grdtScdlYr.value = ""; // 졸업년도
+            if (frm.grdtScdlMm.value) frm.grdtScdlMm.value = ""; // 졸업월
+
+            top.close();
+        }
+	//]]>
+    </script>
+
+    <!-- 웹 접근성 코드 추가 S-->
+    <style>
+        /*  스타일 */
+        /*  #header_cyber {display:none;} */
+
+
+        /* 스킵네비 */
+        #skipNavi li {
+            font-size: 0;
+            line-height: 0;
+        }
+
+        #skipNavi li a {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            color: #fff;
+            position: absolute;
+            left: 0;
+            top: -100px;
+            text-align: center;
+            z-index: 9999;
+            background: #413022;
+            border: 0 none;
+        }
+
+        #skipNavi li a:active,
+        #skipNavi li a:focus {
+            top: 0;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 1.5;
+            border-bottom: 1px solid #fff;
+        }
+
+        .popClose {
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            top: 18px;
+            right: 11px;
+        }
+    </style>
+    <div id="skipNavi">
+        <ul>
+            <li><a href="#popup_cont">본문으로 이동</a></li>
+        </ul>
+    </div>
+    <!-- 웹 접근성 코드 추가 E-->
+
+</head>
+
+<body>
+    <!-- popup size : 400 x 260 -->
+    <div class="popup" style="">
+        <!-- popup title -->
+        <h1>대학교 검색</h1>
+
+        <!-- popup contents -->
+        <div class="popup_cont" id="popup_cont" tabindex="0" style="border:none;">
+
+            <form name="plan" id="plan" method="post" action="/ko/plan_pop02.do" onsubmit="return fn_univNameChk(); ">
+
+                <p class="popup_text01">검색하실 대학교명을 입력해 주세요.(2자 이상)</p>
+
+                <div class="popup_form02">
+                    <fieldset>
+                        <legend>학과&#47;전공명</legend>
+                        <dl>
+                            <dt><label for="univ_name">대학교명</label></dt>
+                            <dd>
+                                <input type="text" id="univ_name" name="univ_name" class="input01" style="width:235px;"
+                                    onkeydown="if (event.keyCode == 13) {fn_univNameChk();}" />
+                                <a href="javascript:fn_univNameChk();"><img
+                                        src="https://static.kosaf.go.kr/www/images/member/popup/btn_search.gif" alt="검색"
+                                        class="btn01" /></a>
+                            </dd>
+                        </dl>
+                    </fieldset>
+                </div>
+
+
+                <div>
+                    <p class="major"><span>해당대학교명</span>을 입력해주세요.</p>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="close02"><a href="javascript:window.close();"><img
+                    src="https://static.kosaf.go.kr/www/images/member/popup/close.gif" alt="새창을 닫습니다." /></a></div>
+    </div>
+</body>
+
+</html>
